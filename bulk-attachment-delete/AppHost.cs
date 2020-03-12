@@ -52,6 +52,7 @@ namespace bulk_attachment_delete
                         if (!result)
                         {
                             Console.WriteLine("FAILED. Exiting program...");
+                            WriteEndMessage(opts);
                             Environment.Exit(1);
                         }
                         else if (opts.Verbose)
