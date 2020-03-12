@@ -1,7 +1,8 @@
-﻿using CsvHelper;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace bulk_attachment_delete
 {
@@ -93,12 +94,13 @@ namespace bulk_attachment_delete
             return;
         }
 
-        private IEnumerable<Attachment> GetAttachments(Options opts)
+        private List<Attachment> GetAttachments(Options opts)
         {
             using var reader = new StreamReader(opts.FilePath);
             using var csv = new CsvReader(reader);
             csv.Configuration.HasHeaderRecord = opts.HasHeaderRecord;
-            return csv.GetRecords<Attachment>();
+
+            return csv.GetRecords<Attachment>().ToList();
         }
     }
 }
