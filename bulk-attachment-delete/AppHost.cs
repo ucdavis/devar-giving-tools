@@ -38,7 +38,7 @@ namespace bulk_attachment_delete
             {
                 try
                 {
-                    var attachments = GetAttachments(opts);
+                    var attachments = GetAttachments(opts.FilePath, opts.HasHeaderRecord);
 
                     foreach (Attachment attachment in attachments)
                     {
@@ -95,11 +95,11 @@ namespace bulk_attachment_delete
             return;
         }
 
-        private List<Attachment> GetAttachments(Options opts)
+        private List<Attachment> GetAttachments(string filePath, bool hasHeaderRecord)
         {
-            using var reader = new StreamReader(opts.FilePath);
+            using var reader = new StreamReader(filePath);
             using var csv = new CsvReader(reader);
-            csv.Configuration.HasHeaderRecord = opts.HasHeaderRecord;
+            csv.Configuration.HasHeaderRecord = hasHeaderRecord;
 
             return csv.GetRecords<Attachment>().ToList();
         }
