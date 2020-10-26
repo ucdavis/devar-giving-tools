@@ -40,9 +40,9 @@ namespace bulk_attachment_delete
             var request = new RestRequest($"api/FileStorage/{id}", Method.DELETE);
             request.AddHeader("X-Auth-Token", _givingSecrets.ApiKey);
 
-            client.ExecuteAsync(request, response => {
-                returnValue = response.StatusCode == HttpStatusCode.OK;
-            });
+            var response = client.Execute(request);
+
+            returnValue = response.StatusCode == HttpStatusCode.OK;
 
             return returnValue;
         }       
