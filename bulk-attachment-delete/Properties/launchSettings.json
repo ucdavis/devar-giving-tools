@@ -2,7 +2,7 @@
   "profiles": {
     "bulk-attachment-delete": {
       "commandName": "Project",
-      "commandLineArgs": "--verbose true --input filename.csv"
+      "commandLineArgs": "--verbose true --input C:\\data\\attachments.csv"
     }
   }
 }
