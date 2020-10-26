@@ -101,7 +101,9 @@ namespace bulk_attachment_delete
             using var csv = new CsvReader(reader);
             csv.Configuration.HasHeaderRecord = hasHeaderRecord;
 
-            return csv.GetRecords<Attachment>().ToList();
+            var attachments = csv.GetRecords<Attachment>().ToList();
+
+            return attachments;
         }
     }
 }
