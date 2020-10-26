@@ -33,8 +33,8 @@ namespace bulk_attachment_delete
             {
                 throw new ArgumentException("Input file does not exist.", "input");
             }
-
-            while (Console.ReadKey().Key != ConsoleKey.Enter) 
+            
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)) 
             {
                 try
                 {
