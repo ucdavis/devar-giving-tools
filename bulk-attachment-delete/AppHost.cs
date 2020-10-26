@@ -14,6 +14,7 @@ namespace bulk_attachment_delete
     public class AppHost : IAppHost
     {
         private readonly IGivingApiService _givingApiService;
+        private Options _opts;
 
         public AppHost(IGivingApiService givingApiService)
         {
@@ -22,7 +23,9 @@ namespace bulk_attachment_delete
 
         public void Run(Options opts)
         {
-            WriteStartMessage(opts);
+            _opts = opts;
+            
+            WriteStartMessage();
 
             if (String.IsNullOrWhiteSpace(opts.FilePath))
             {
@@ -68,16 +71,16 @@ namespace bulk_attachment_delete
                 }
             }
 
-            WriteEndMessage(opts);
+            WriteEndMessage();
 
             Environment.Exit(0);
         }
 
-        private void WriteStartMessage(Options opts)
+        private void WriteStartMessage()
         {
-            Console.Write("Press <Enter> to exit... ");
+            Console.Write("Press <Esc> to exit... ");
 
-            if (opts.Verbose)
+            if (_opts.Verbose)
             {
                 DateTime dat = DateTime.Now;
                 Console.WriteLine("Start time: {0:d} at {0:t}", dat);                
@@ -85,9 +88,9 @@ namespace bulk_attachment_delete
             return;
         }
 
-        private void WriteEndMessage(Options opts)
+        private void WriteEndMessage()
         {
-            if (opts.Verbose)
+            if (_opts.Verbose)
             {
                 DateTime dat = DateTime.Now;
                 Console.WriteLine("End time: {0:d} at {0:t}", dat);
